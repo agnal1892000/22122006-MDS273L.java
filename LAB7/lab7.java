@@ -1,198 +1,218 @@
-
 import java.io.*;
+
 import java.util.*;
 
-public class lab7{
+public class lab7 {
 
-    public static float max(float[] a){
-        float max_val = -100.f;
-        for(float k:a){
-            if(k > max_val){
-                max_val = k;
-            }
-        }
-        return max_val;
+ 
+    static void   Mean(float[] arr,int m){
+    float sum=0;
+    for(int i=0;i<m;i++){
+        sum+=arr[i];
+
+    }float mean=sum/m;
+    System.out.println("mean="+mean) ;
     }
 
-    public static float min(float[] a){
-        float min_val = 1000.f;
-        for(float k:a){
-            if(k < min_val){
-                min_val = k;
-            }
-        }
-        return min_val;
-    }
 
-    public static float mean(float[] a){
-        float sum = 0;
-        for(float i: a){
-            sum += i;
-        }
-        float mean = sum/(a.length);
-        return mean;
-    }
 
-    public static int[] frequency(float[] arr ){
-        int [] freq = new int [arr.length];
-        int num = -1;
-        for(int i = 0; i < arr.length; i++){
-            int count = 1;
-            for(int j = i+1; j < arr.length; j++){
-                if(arr[i] == arr[j]){
-                    count++;            
-                    freq[j] = num;
+    static float[] sort(float[] arr,int n){
+
+        float temp=0;
+        for(int i=0;i<n;i++){
+             for(int j=i+1;j<n;j++){
+                 
+                 if(arr[i]>arr[j]){
+                    temp=arr[i];
+                    arr[i]=arr[j];
+                    arr[j]=temp;
+                    
                 }
-            }
-            if(freq[i] != num)
-            freq[i] = count;
-        }
-        return freq;
+             }
+            }return arr;   
     }
 
-    public static float mode(float[] a){
-        int[] f= frequency(a);
-        int max = 0;
-        int max_index = 0;
-        for(int i = 0; i < f.length; i++){  
-            if(f[i] != -1){
-                if(max > f[i]){
-                    max = f[i];
-                    max_index = i;
-                }
-            }
-        }	
-        return a[max_index];
+
+    static void median(float arr[],int n){
+     float[] arr1=sort(arr,n);
+     if(arr1.length%2==0){
+        int a=(n/2);
+        int b=a+1;
+       double median=(arr1[a-1]+arr1[b-1])/(2.0);
+       System.out.println("median="+median);
+       }
+       else{
+        double median=((arr1[(n)/2]));
+        System.out.println("median="+median);
+       }
     }
 
-    public static float[] sort(float[] arr){
-        for (int i = 0; i < arr.length; i++){
-            for (int j = i + 1; j < arr.length; j++){
-                float tmp = 0;
-                if (arr[i] > arr[j]){
-                    tmp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = tmp;
-                }
-            }
-        }
-        return arr;
-    }
     
-    public static float median(float[] a){
-        float[] sorted_array = sort(a);
-        if(sorted_array.length%2 == 1){
-            return (float)sorted_array[a.length/2];
-        }
-        else{
-            return (float)(sorted_array[a.length/2] + sorted_array[a.length/2 +1])/2;  
-        }
-    }
-
-    public static void display(float[] sl,float[] sw,float[] pl,float[] pw) {
     
-        
-        System.out.printf(" SEPAL LENGTH ");
-        System.out.printf("Mean",mean(sl));
-        System.out.printf("Median",median(sl));
-        System.out.printf("Mode",mode(sl));
-        System.out.printf("Max",max(sl));
-        System.out.printf("Min",min(sl));
-        
-
+    static void mode(float[] arr,int l){
         
       
-        System.out.printf(" SEPAL WIDTH ");
-        System.out.printf("Mean",mean(sw));
-        System.out.printf("Median",median(sw));
-        System.out.printf("Mode",mode(sw));
-        System.out.printf("Max",max(sw));
-        System.out.printf("Min",min(sw));
+            int max=0;
+            float max_val=0;
+             int n=arr.length;
+             //int m_arr[]=new int[n];
+             for(int i=0;i<n;i++){
+              int count=0;
+              for(int j=i+1;j<n;j++){
+                  if(arr[i]==arr[j]){
+                      count+=1;
+                  }
+              }
+             if(count>max){
+              max=count;
+              max_val=arr[i];
+             }
+      
+             
+            
+             }
+      
+             System.out.println("mode="+max_val);
+           
+             
+          
         
-
-        System.out.printf("PETAL LENGTH");
-        System.out.printf("Mean",mean(pl));
-        System.out.printf("Median",median(pl));
-        System.out.printf("Mode",mode(pl));
-        System.out.printf("Max",max(pl));
-        System.out.printf("Min",min(pl));
-        
+    }
 
 
-        
-        System.out.printf("PETAL WIDTH");
-        System.out.printf("Mean",mean(pw));
-        System.out.printf("Median",median(pw));
-        System.out.printf("Mode",mode(pw));
-        System.out.printf("Max",max(pw));
-        System.out.printf("Min",min(pw));
-    
-    }  
-    
-    public static void main(String[] args) {
-        try{
-        File csv = new File("Iris.csv");
-        Scanner sc = new Scanner(csv);
-        sc.nextLine();
-        sc.useDelimiter(",");
-        float[] sl = new float[150];
-        float[] sw = new float[150];
-        float[] pl = new float[150];
-        float[] pw = new float[150];
-        int k = 0;
-        System.out.println(sc.next());
-        System.out.println(sc.nextFloat());
-        System.out.println(sc.nextFloat());
-        System.out.println(sc.nextFloat()); 
-        System.out.println(sc.nextFloat());
-        System.out.println(sc.nextLine());
-
-        while(sc.hasNextLine()){
-        sc.next();
-        sl[k] = Float.parseFloat(sc.next());
-        sw[k] = Float.parseFloat(sc.next());
-        pl[k] = Float.parseFloat(sc.next());
-        pw[k] = Float.parseFloat(sc.next());
-        sc.nextLine();
-        k++;
-        sc.close();
+        static void max(float[] arr,int n){
+            float[] arr1 = sort(arr,n);
+            float max = arr1[n-1];
+            System.out.println("max="+max);;
         }
+
+        static void min(float[] arr,int n){
+            float[] arr1 = sort(arr,n);
+            float min = arr1[0];
+            System.out.println("min="+min);
+        }
+    
+
+        
+    
+
+public static void main(String[] args ) {
+    String[][] arr=new String[1024][6];
+    int n=0;   
+    
+    try{
         
         
-        System.out.printf("The Total Statistics");
+    File file = new File("Iris.csv");
+    Scanner scan = new Scanner(file);
+    
+    while (scan.hasNextLine()) { 
         
+        String temp=scan.nextLine();
+        arr[n]=temp.split(",");
+        n++;
+    } scan.close();
 
-        display(sl,sw,pl,pw);
-        Scanner scan = new Scanner(csv);
-        scan.nextLine();
-        scan.useDelimiter(",");
-        String s[] = {"SETOSA" , "VERSICOLOR" , "VIRGINICA"};
+    }
+    catch(Exception io){
+        System.out.println(io.getMessage());
+    }
 
-        float[] sl1 = new float[50];
-        float[] sw1 = new float[50];
-        float[] pl1 = new float[50];
-        float[] pw1 = new float[50];
-
-        for(String o:s){
-
+     n--; 
+    float[] seplen =new float[n];
+    float[] sepwid =new float[n];
+    float[] petlen =new float[n];
+    float[] petwid =new float[n];
+    String[] species =new String[n];
+    
+    for(int i =1;i<=n;i++){
+        seplen[i-1]=Float.parseFloat(arr[i][1]);
+        sepwid[i-1]=Float.parseFloat(arr[i][2]);
+        petlen[i-1]=Float.parseFloat(arr[i][3]);
+        petwid[i-1]=Float.parseFloat(arr[i][4]);
+        species[i-1]=arr[i][5];
+}
+    float[][] total = {seplen, sepwid, petlen, petwid};
+    float[][] setosa =new float[4][n]; 
+    float[][] versicolor =new float[4][n]; 
+    float[][] virginica =new float[4][n];
+    int setCount = 0;
+    int verCount = 0; 
+    int virCount = 0; 
+    for(int i = 0; i < n; i++){
+        if(species[i].equals("setosa")){
             
-            System.out.printf("",o);
-            
-
-            for(int i = 0;i<50;i++){
-
-                scan.next();
-                sl1[i] = Float.parseFloat(scan.next());
-                sw1[i] = Float.parseFloat(scan.next());
-                pl1[i] = Float.parseFloat(scan.next());
-                pw1[i] = Float.parseFloat(scan.next());
-                scan.nextLine();
+            for(int j = 0; j < 4; j++){
+                setosa[j][setCount] = total[j][i];
             }
-            display(sl1,sw1,pl1,pw1);
-            scan.close();
+            setCount++; 
         }
-        } catch(Exception e){
-        System.out.println(e.getMessage());
+        else if(species[i].equals("versicolor")){
+            
+            for(int j = 0; j < 4; j++){
+                versicolor[j][verCount] = total[j][i];
+            }
+            verCount++; 
+        }
+        else if(species[i].equals("virginica")){
+            
+            for(int j = 0; j < 4; j++){
+                virginica[j][virCount] = total[j][i];
+            }
+            virCount++; 
         }
     }
+    float[] seplen_set =new float[setCount];
+    float[] sepwid_set =new float[setCount];
+    float[] petlen_set =new float[setCount];
+    float[] petwid_set=new float[setCount];
+    for(int i =1;i<setCount;i++){
+        seplen_set[i]=setosa[1][i];
+        sepwid_set[i]=setosa[2][i];
+        petlen_set[i]=setosa[3][i];
+        petwid_set[i]=setosa[4][i];
+    }
+
+System.out.println("###############################################");
+System.out.println("summary of sepal length:");
+Mean(seplen,n);
+median(seplen,n);
+mode(seplen,n);
+max(seplen,n);
+min(seplen,n);
+System.out.println("###############################################");
+
+System.out.println("summary of sepal width:");
+Mean(sepwid,n);
+median(sepwid,n);
+mode(sepwid,n);
+max(sepwid,n);
+min(sepwid,n);
+System.out.println("###############################################");
+
+System.out.println("summary of petal length:");
+Mean(petlen,n);
+median(petlen,n);
+mode(petlen,n);
+max(petlen,n);
+min(petlen,n);
+System.out.println("###############################################");
+
+System.out.println("summary of petal width:");
+Mean(petwid,n);
+median(petwid,n);
+mode(petwid,n);
+max(petwid,n);
+min(petwid,n);
+System.out.println("###############################################");
+
+System.out.println("summary of setosa sepal length:");
+ Mean(seplen_set,setCount);
+ median(seplen_set,setCount);
+
 }
+}
+
+    
+    
+
