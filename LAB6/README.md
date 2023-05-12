@@ -22,3 +22,6 @@ Update the student details based on the search based on name or register number.
 Display all students
 Displays the details of all students.
 Save the details of each student in a file, with the student name as filename.
+
+
+![lab6](https://github.com/agnal1892000/22122006-MDS273L.java/assets/118061144/2ad8db5a-600b-4d03-bff9-18948d662d59)
