@@ -24,7 +24,7 @@ public class lab4 {
            }
            else{
             balance +=amount;
-            System.out.println("balance");
+            System.out.println("balance"+balance);
            }
            
            break;
@@ -36,7 +36,7 @@ public class lab4 {
            }
            else{
             balance -=amount;
-            System.out.println("balance");
+            System.out.println("balance"+balance);
            }
            break;
         case 3:

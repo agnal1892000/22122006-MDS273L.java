@@ -77,7 +77,7 @@ public class lab6 {
         
 
                 System.out.println("Enter your phone number");
-                String phone=scan.nextLine();
+                int phone=scan.nextInt();
        
                 System.out.println("Enter your class");
                 String Class=scan.nextLine();
@@ -87,6 +87,41 @@ public class lab6 {
                Stdetails[count]=new student(regno,name,email,phone,Class,department);
                 
                 count+=1;
+                String filename=name+".txt";
+                try{
+                    File file=new File(filename);
+    
+                   /// FileWriter write=new FileWriter(file,true); 
+                    if(file.exists()){
+                        System.out.println("File exixts..");
+                        FileWriter write=new FileWriter(file,true); 
+                        write.write("\nregno"+regno+"\nname"+name+"\nemail"+email+"\nphone"+phone+"\nclass"+Class+"\ndepartment"+department);
+                        write.close();
+                    }else{
+                        System.out.println("File is missing");
+                        if(file.createNewFile()){
+                            System.out.println("File created");
+                            FileWriter write=new FileWriter(file,true); 
+                            write.write("\nregno"+regno+"\nname"+name+"\nemail"+email+"\nphone"+phone+"\nclass"+Class+"\ndepartment"+department);
+                        write.close();
+                        }else{
+                            System.out.println("File creation error");
+                        }
+                    }
+                    
+// FileWriter write =new FileWriter(file);
+//                     write.write("File write");
+//                     write.close();
+        
+                
+                    Scanner sc= new Scanner(file);
+                    while(scan.hasNextLine()){
+                        System.out.println(scan.nextLine()); 
+                    }
+                }catch(Exception ex){
+                    System.out.println(ex.getMessage());
+                }
+            
                 break;
 
                 case 2:
@@ -118,36 +153,12 @@ public class lab6 {
             }
            }
            while(ch!=4);
-           try{
-            File file=new File("name.txt");  
-            if(file.exists()){
-                System.out.println("File exixts..");
-
-            }else{
-                System.out.println("File is missing");
-                if(file.createNewFile()){
-                    System.out.println("File created");
-                }else{
-                    System.out.println("File creation error");
-                }
-            }
-            
-            FileWriter write =new FileWriter(file);
-            write.write("File write");
-            write.close();
-
-        
-            Scanner scan = new Scanner(file);
-            while(scan.hasNextLine()){
-                System.out.println(scan.nextLine()); 
-            }
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
-        }
-    }
+                
+      }
+     
     
-}
 
+    }
            
 
     
