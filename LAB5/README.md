@@ -114,3 +114,7 @@ Ciphertext: QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD
 
 You are supposed to create a menu-driven program that can encrypt or decrypt a message that the user wishes to transfer.
 Your program should have two functions, one for encryption and another for decryption. Each function will accept a string message and return the encrypted or decrypted message.
+
+
+
+![lab5 (1)](https://github.com/agnal1892000/22122006-MDS273L.java/assets/118061144/8ae2a3fd-0c86-405f-acbd-74f611ea2f75)
